@@ -1,1 +1,47 @@
+void invertBinaryTree(Node* root)
+{   
+    if(root == NULL)
+    {
+        return;
+    }
+    queue<Node *>my_queue;
+    q.push(root);
+    bool level=false;
+    queue<Node*> level_nodes;
+	  stack<int> level_data;
+    while (!q.empty())
+    {   
+        int n = q.size();
+        while (n--)
+        {
+            Node* curr=q.front();
+            q.pop();
+            if(level)
+            {
+                level_nodes.push(curr);
+                level_data.push(curr->data);
+            }
+            if(n==0)
+            {
+                level=!level;
+                while(!level_nodes.empty())
+                {
+                    Node* front = level_nodes.front();
+					          front->data = level_data.top();
 
+					          level_nodes.pop();
+					          level_data.pop();
+                }
+            }
+            
+        }
+        // push left child of current node to the queue
+			  if (curr->left)
+				    q.push(curr->left);
+
+			  // push right child of current node to the queue
+			  if (curr->right)
+				    q.push(curr->right);
+        
+    }
+}
